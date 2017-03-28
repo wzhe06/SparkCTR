@@ -1,13 +1,11 @@
-package com.ipinyou.pricemodel
+package com.ggstar.ctr
 
-import com.ipinyou.offlinemodel.{Delimiter, GetDomain}
 import org.apache.spark.ml.regression.GBTRegressor
 import org.apache.spark.ml.{PipelineStage, Pipeline}
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.ml.feature.{VectorAssembler, StringIndexer, OneHotEncoder}
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.linalg.{DenseVector, SparseVector}
-import org.apache.spark.mllib.regression.LinearRegressionModel
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{DataFrame, Row, SQLContext}
 import org.apache.spark.{SparkContext, SparkConf}
@@ -15,7 +13,7 @@ import org.apache.spark.{SparkContext, SparkConf}
 /**
  * Created by ggstar on 12/28/16.
  */
-object LRPriceModel {
+object CTRPredictModel {
 
   def main(args: Array[String]) {
     val conf = new SparkConf().setAppName("test").setMaster("local[4]")

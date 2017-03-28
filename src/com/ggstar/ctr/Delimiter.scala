@@ -1,7 +1,7 @@
-package com.ipinyou.offlinemodel
+package com.ggstar.ctr
 
 object Delimiter {
-  
+
   val TABLE = "\t"
   val SECTION = "\u0001"
   val FIELD = "\u0002"

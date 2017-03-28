@@ -1,6 +1,6 @@
-package com.ipinyou.mllib
+package com.ggstar.mllib
 
-import org.apache.spark.ml.classification.LogisticRegression
+
 import org.apache.spark.mllib.classification.{LogisticRegressionWithLBFGS, SVMWithSGD}
 import org.apache.spark.mllib.evaluation.{MulticlassMetrics, BinaryClassificationMetrics}
 import org.apache.spark.mllib.regression.{LinearRegressionWithSGD, LabeledPoint}

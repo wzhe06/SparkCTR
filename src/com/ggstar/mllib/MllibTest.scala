@@ -1,7 +1,5 @@
-package com.ipinyou.mllib
+package com.ggstar.mllib
 
-import org.apache.spark
-import org.apache.spark.mllib.stat.{Statistics, MultivariateStatisticalSummary}
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkContext, SparkConf}
 import org.apache.spark.mllib.linalg.{Matrices, Matrix, Vector, Vectors}
