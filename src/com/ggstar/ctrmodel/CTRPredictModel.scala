@@ -1,6 +1,6 @@
-package com.ggstar.ctr
+package com.ggstar.ctrmodel
 
-import com.ggstar.mllib.GetDomain
+import com.ggstar.util.{Delimiter, GetDomain}
 import org.apache.spark.ml.regression.GBTRegressor
 import org.apache.spark.ml.{Pipeline, PipelineStage}
 import org.apache.spark.ml.classification.LogisticRegression

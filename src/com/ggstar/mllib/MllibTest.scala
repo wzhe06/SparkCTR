@@ -17,10 +17,6 @@ object MllibTest {
     val dv:Vector = Vectors.dense(1.0,2.0,3.0)
     val sv:Vector = Vectors.sparse(2, Array(0,2), Array(1.0, 3.0))
 
-
-
-
-
     val pos:LabeledPoint = LabeledPoint(1, dv)
     val neg:LabeledPoint = LabeledPoint(0, sv)
 

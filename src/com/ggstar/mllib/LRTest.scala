@@ -1,17 +1,16 @@
 package com.ggstar.mllib
 
-
 import org.apache.spark.mllib.classification.{LogisticRegressionWithLBFGS, SVMWithSGD}
-import org.apache.spark.mllib.evaluation.{MulticlassMetrics, BinaryClassificationMetrics}
-import org.apache.spark.mllib.regression.{LinearRegressionWithSGD, LabeledPoint}
+import org.apache.spark.mllib.evaluation.{BinaryClassificationMetrics, MulticlassMetrics}
+import org.apache.spark.mllib.regression.{LabeledPoint, LinearRegressionWithSGD}
 import org.apache.spark.mllib.util.MLUtils
 import org.apache.spark.rdd.RDD
-import org.apache.spark.{SparkContext, SparkConf}
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  * Created by ggstar on 12/19/16.
  */
-object LR {
+object LRTest {
 
   def main(args: Array[String]) {
     val conf = new SparkConf().setAppName("test").setMaster("local[4]")

@@ -1,4 +1,4 @@
-package com.ggstar.ctr
+package com.ggstar.util
 
 object Delimiter {
 
