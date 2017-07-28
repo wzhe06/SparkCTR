@@ -1,14 +1,15 @@
 package com.ggstar.ctr
 
+import com.ggstar.mllib.GetDomain
 import org.apache.spark.ml.regression.GBTRegressor
-import org.apache.spark.ml.{PipelineStage, Pipeline}
+import org.apache.spark.ml.{Pipeline, PipelineStage}
 import org.apache.spark.ml.classification.LogisticRegression
-import org.apache.spark.ml.feature.{VectorAssembler, StringIndexer, OneHotEncoder}
+import org.apache.spark.ml.feature.{OneHotEncoder, StringIndexer, VectorAssembler}
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.linalg.{DenseVector, SparseVector}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{DataFrame, Row, SQLContext}
-import org.apache.spark.{SparkContext, SparkConf}
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  * Created by ggstar on 12/28/16.
