@@ -8,8 +8,10 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
- * Created by ggstar on 12/19/16.
- */
+  * A test of logistic regression model
+  *
+  * @author zhe.wang
+  */
 object LRTest {
 
   def main(args: Array[String]) {
@@ -17,12 +19,14 @@ object LRTest {
     val sc = new SparkContext(conf)
     val data:RDD[LabeledPoint] = MLUtils.loadLibSVMFile(sc, "data/mllib/sample_libsvm_data.txt")
 
+    //split samples into training samples and testing samples
     val splits = data.randomSplit(Array(0.8,0.2))
     val training = splits(0).cache()
     val test = splits(1)
 
-    val iterNum =1
+    val iterNum =10
 
+    //build a SVM model
     val model = SVMWithSGD.train(training, iterNum)
     model.clearThreshold()
 
@@ -31,20 +35,21 @@ object LRTest {
       (score, point.label)
     }
 
+    //build metrics to evaluate the SVM model
     val metrics = new BinaryClassificationMetrics(score)
     val auc = metrics.areaUnderROC()
-
     println("auc=" + auc)
 
-    val lrmodel = new LogisticRegressionWithLBFGS().setNumClasses(10).run(training)
+
+    //build a logistic regression model, and use BFGS to train the model
+    val lrmodel = new LogisticRegressionWithLBFGS().setNumClasses(2).run(training)
     val lrresult = test.map{ point =>
       (lrmodel.predict(point.features), point.label)
     }
 
     val lrmetrics = new MulticlassMetrics(lrresult)
     println("lr precision:\t" + lrmetrics.precision)
-    //model.save(sc, "/Users/ggstar/Desktop")
-
+    lrmodel.save(sc, "./modelresult")
 
 
     val sgdlrmodel = LinearRegressionWithSGD.train(training, 100)
@@ -53,7 +58,7 @@ object LRTest {
       (point.label, sgdlrmodel.predict(point.features))
     }
 
-    val MSE = sgdresult.map{case(v, p) => math.pow((v - p), 2)}.mean()
+    val MSE = sgdresult.map{case(v, p) => v-p}.mean()
     println("sgd mse:\t" + MSE)
 
   }

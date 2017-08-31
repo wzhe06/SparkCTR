@@ -1,7 +1,8 @@
 package com.ggstar.util
 
 /**
-  * Created by zhe.wang on 7/28/17.
+  * Extract main domain from a href
+  * @author zhe.wang
   */
 import java.net.URLDecoder
 

@@ -1,5 +1,10 @@
 package com.ggstar.util
 
+/**
+  * Delimiters of click log and impression log
+  *
+  * @author zhe.wang
+  */
 object Delimiter {
 
   val TABLE = "\t"
