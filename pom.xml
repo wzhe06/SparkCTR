@@ -23,6 +23,7 @@
         </repository>
     </repositories>
 
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core_2.10 -->
         <dependency>
