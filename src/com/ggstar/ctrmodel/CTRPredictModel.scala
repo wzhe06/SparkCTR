@@ -1,5 +1,6 @@
 package com.ggstar.ctrmodel
 
+import org.apache.spark.internal.Logging
 import com.ggstar.util.{Delimiter, GetDomain}
 import org.apache.spark.ml.regression.GBTRegressor
 import org.apache.spark.ml.{Pipeline, PipelineStage}
@@ -160,6 +161,7 @@ object CTRPredictModel {
     val scoreAndLabels = prediction.select("label", "probability").map { row =>
       ((row.apply(1).asInstanceOf[DenseVector]).apply(1), row.apply(0).asInstanceOf[Double])
     }
+
 
     val metrics = new BinaryClassificationMetrics(scoreAndLabels)
     val auROC = metrics.areaUnderROC()

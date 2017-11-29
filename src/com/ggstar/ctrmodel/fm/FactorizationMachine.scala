@@ -6,7 +6,7 @@ import org.json4s.jackson.JsonMethods._
 
 import scala.util.Random
 
-import org.apache.spark.{SparkContext, Logging}
+import org.apache.spark.SparkContext
 import org.apache.spark.mllib.linalg._
 import org.apache.spark.mllib.optimization.{Updater, Gradient}
 import org.apache.spark.rdd.RDD

@@ -1,3 +1,7 @@
+import org.apache.spark.mllib.regression.{FMWithLBFGS, FMWithSGD}
+import org.apache.spark.mllib.util.MLUtils
+import org.apache.spark.{SparkConf, SparkContext}
+
 /**
  * Created by zrf on 4/18/15.
  */

@@ -1,6 +1,7 @@
 package org.apache.spark.mllib.regression
 
 import org.apache.spark.Logging
+import org.apache.spark.internal.Logging
 import org.apache.spark.mllib.linalg.{DenseMatrix, Vectors, Vector}
 import org.apache.spark.mllib.optimization.GradientDescent
 import org.apache.spark.rdd.RDD
