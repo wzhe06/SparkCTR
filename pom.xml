@@ -8,60 +8,44 @@
     <artifactId>CTRmodel</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
-    <repositories>
-        <repository>
-            <id>Spring Plugins</id>
-            <name>Spring Plugins</name>
-            <url>http://repo.spring.io/plugins-release/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+    <properties>
+        <spark.version>2.3.0</spark.version>
+        <scala.version>2.11</scala.version>
+    </properties>
 
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core_2.10 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.10</artifactId>
-            <version>2.1.0</version>
+            <artifactId>spark-core_${scala.version}</artifactId>
+            <version>${spark.version}</version>
         </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql_2.10 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.10</artifactId>
-            <version>2.1.0</version>
+            <artifactId>spark-sql_${scala.version}</artifactId>
+            <version>${spark.version}</version>
         </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-mllib_2.10 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-mllib -->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-mllib_2.10</artifactId>
-            <version>2.1.0</version>
+            <artifactId>spark-mllib_${scala.version}</artifactId>
+            <version>${spark.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.hadoop.gplcompression</groupId>
-            <artifactId>hadoop-lzo</artifactId>
-            <version>0.4.15-gplextras5.0.0</version>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_${scala.version}</artifactId>
+            <version>${spark.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>httpclient</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <version>2.7.1.2.4.0.1-6</version>
-        </dependency>
-
-
     </dependencies>
-
-
 </project>
