@@ -1,13 +1,17 @@
 package com.ggstar.example
 
-import com.ggstar.ctrmodel.{LogisticRegressionCtrModel, NaiveBayesCtrModel}
+import com.ggstar.ctrmodel.{LogisticRegressionCtrModel, NaiveBayesCtrModel, NeuralNetworkCtrModel, RandomForestCtrModel}
 import com.ggstar.evaluation.Evaluator
 import com.ggstar.features.FeatureEngineering
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.log4j.{Level, Logger}
 
 object ModelSelection {
   def main(args: Array[String]): Unit = {
+
+    Logger.getLogger("org").setLevel(Level.ERROR)
+
     val conf = new SparkConf()
       .setMaster("local[2]")
       .setAppName("ctrModel")
@@ -26,12 +30,17 @@ object ModelSelection {
     samples.select($"scaledFeatures").show(10)
 
     val Array(trainingSamples, validationSamples) = samples.randomSplit(Array(0.7, 0.3))
-
-    val lrModel = new LogisticRegressionCtrModel().train(trainingSamples)
-    val nbModel = new NaiveBayesCtrModel().train(trainingSamples)
-
     val evaluator = new Evaluator
+
+    val nbModel = new NaiveBayesCtrModel().train(trainingSamples)
     evaluator.evaluate(nbModel.transform(validationSamples))
+    val lrModel = new LogisticRegressionCtrModel().train(trainingSamples)
     evaluator.evaluate(lrModel.transform(validationSamples))
+    val nnModel = new NeuralNetworkCtrModel().train(trainingSamples)
+    evaluator.evaluate(nnModel.transform(validationSamples))
+    val rfModel = new RandomForestCtrModel().train(trainingSamples)
+    evaluator.evaluate(rfModel.transform(validationSamples))
+
+
   }
 }
