@@ -42,8 +42,8 @@ You can directly get comparision among different models on metrics such as AUC o
         |  60392|    636|         22|      series|1533445757|              0|          0.0|   0.0221|          1|[0.0, 0.0, 0.0, 0...|[0.00568220764398...|    0|
         +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+         
 # Usage
-It's a maven project. Spark version is 2.3.0. Scala version is 2.11. 
-After dependencies are imported by maven automatically, you can simple run the example function(com.ggstar.example.ModelSelection) to get the metrics comparison among all models.
+It's a maven project. Spark version is 2.3.0. Scala version is 2.11. <br />
+After dependencies are imported by maven automatically, you can simple run the example function (**com.ggstar.example.ModelSelection**) to train all the CTR models and get the metrics comparison among all the models.
 
 # Related Papers on CTR prediction
 * [[GBDT+LR]Practical Lessons from Predicting Clicks on Ads at Facebook.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/%5BGBDT%2BLR%5DPractical%20Lessons%20from%20Predicting%20Clicks%20on%20Ads%20at%20Facebook.pdf) <br />
