@@ -7,6 +7,7 @@ import org.apache.spark.sql.DataFrame
 
 class FeatureEngineering {
 
+  //transform array(user_embedding, item_embedding) to vector for following vectorAssembler
   def transferArray2Vector(samples:DataFrame):DataFrame = {
     import samples.sparkSession.implicits._
 
@@ -40,6 +41,7 @@ class FeatureEngineering {
       "label")
   }
 
+  //calculate inner product between user embedding and item embedding
   def calculateEmbeddingInnerProduct(samples:DataFrame): DataFrame ={
     import samples.sparkSession.implicits._
 
@@ -88,7 +90,7 @@ class FeatureEngineering {
       "label")
   }
 
-
+  //pre process features to generate feature vector including embedding inner product
   def preProcessInnerProductSamples(samples:DataFrame):PipelineModel = {
     val contentTypeIndexer = new StringIndexer().setInputCol("content_type").setOutputCol("content_type_index")
 
@@ -121,6 +123,8 @@ class FeatureEngineering {
     featurePipeline.fit(samples)
   }
 
+
+  //calculate outer product between user embedding and item embedding
   def calculateEmbeddingOuterProduct(samples:DataFrame): DataFrame ={
     import samples.sparkSession.implicits._
 
@@ -160,7 +164,7 @@ class FeatureEngineering {
       "label")
   }
 
-
+  //pre process features to generate feature vector including embedding outer product
   def preProcessOuterProductSamples(samples:DataFrame):PipelineModel = {
     val contentTypeIndexer = new StringIndexer().setInputCol("content_type").setOutputCol("content_type_index")
 
@@ -193,6 +197,7 @@ class FeatureEngineering {
     featurePipeline.fit(samples)
   }
 
+  //normal pre process samples to generate feature vector
   def preProcessSamples(samples:DataFrame):PipelineModel = {
     val contentTypeIndexer = new StringIndexer().setInputCol("content_type").setOutputCol("content_type_index")
 

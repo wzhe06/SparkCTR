@@ -13,8 +13,11 @@ class RandomForestCtrModel {
   def train(samples:DataFrame) : Unit = {
     _pipelineModel = new FeatureEngineering().preProcessSamples(samples)
 
-    _model = new RandomForestClassifier().setNumTrees(10).setMaxDepth(4)
-      .setFeaturesCol("scaledFeatures").setLabelCol("label")
+    _model = new RandomForestClassifier()
+      .setNumTrees(10)    //the number of trees
+      .setMaxDepth(4)     //the max depth of each tree
+      .setFeaturesCol("scaledFeatures")
+      .setLabelCol("label")
       .fit(_pipelineModel.transform(samples))
   }
 

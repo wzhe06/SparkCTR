@@ -23,8 +23,10 @@ object ModelSelection {
     rawSamples.printSchema()
     rawSamples.show(10)
 
+    //transform array to vector for following vectorAssembler
     val samples = new FeatureEngineering().transferArray2Vector(rawSamples)
 
+    //split samples into training samples and validation samples
     val Array(trainingSamples, validationSamples) = samples.randomSplit(Array(0.7, 0.3))
     val evaluator = new Evaluator
 
@@ -62,6 +64,5 @@ object ModelSelection {
     val opnnModel = new OuterProductNNCtrModel()
     opnnModel.train(trainingSamples)
     evaluator.evaluate(opnnModel.transform(validationSamples))
-
   }
 }

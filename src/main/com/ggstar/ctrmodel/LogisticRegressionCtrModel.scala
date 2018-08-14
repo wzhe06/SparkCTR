@@ -13,8 +13,12 @@ class LogisticRegressionCtrModel {
   def train(samples:DataFrame) : Unit = {
     _pipelineModel = new FeatureEngineering().preProcessSamples(samples)
 
-    _model = new LogisticRegression().setMaxIter(20).setRegParam(0.0).setElasticNetParam(0.0)
-      .setFeaturesCol("scaledFeatures").setLabelCol("label")
+    _model = new LogisticRegression()
+      .setMaxIter(20)           //max iteration
+      .setRegParam(0.0)         //regularization parameter
+      .setElasticNetParam(0.0)  //0-L2 regularization 1-L1 regularization
+      .setFeaturesCol("scaledFeatures")
+      .setLabelCol("label")
       .fit(_pipelineModel.transform(samples))
   }
 
