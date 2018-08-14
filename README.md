@@ -14,21 +14,33 @@ CTR prediction model based on pure Spark MLlib, no third-party library.
 A small portion of some public database for test and initial debug.
 You can directly get comparision among different models on metrics such as AUC on ROC and P-R curve. <br />
 **Data Format**
+
         root
-         |-- user_id: integer (nullable = true)
-         |-- item_id: integer (nullable = true)
-         |-- category_id: integer (nullable = true)
-         |-- content_type: string (nullable = true)
-         |-- timestamp: string (nullable = true)
-         |-- user_item_click: long (nullable = true)
-         |-- user_item_imp: double (nullable = true)
-         |-- item_ctr: double (nullable = true)
-         |-- is_new_user: integer (nullable = true)
-         |-- user_embedding: array (nullable = true)
-         |    |-- element: double (containsNull = true)
-         |-- item_embedding: array (nullable = true)
-         |    |-- element: double (containsNull = true)
-         |-- label: integer (nullable = true)
+         |-- user_id: integer (user id)
+         |-- item_id: integer (item id)
+         |-- category_id: integer (item category id)
+         |-- content_type: string (item content type)
+         |-- timestamp: string (timestamp)
+         |-- user_item_click: long (the number of user clicked the item)
+         |-- user_item_imp: double (the number of user watched the item)
+         |-- item_ctr: double (historical CTR of the item)
+         |-- is_new_user: integer (is the user a new user)
+         |-- user_embedding: array (embedding of the user, a double array of 50 dimentions)
+         |    |-- element: double
+         |-- item_embedding: array (embedding of the item, a double array of 50 dimentions)
+         |    |-- element: double
+         |-- label: integer (label of the sample 0-negative 1-positive)
+                 
+        Example:
+         
+        +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+
+        |user_id|item_id|category_id|content_type| timestamp|user_item_click|user_item_imp| item_ctr|is_new_user|      user_embedding|      item_embedding|label|
+        +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+
+        |  20143|     52|         16|       movie|1533487890|              0|      0.69314|0.0061725|          0|[0.06483652442693...|[0.0, 0.0, 0.0, 0...|    0|
+        |  18376|     25|          4|       movie|1533527993|              0|          0.0|0.0138948|          0|[0.02370533533394...|[-0.0905480831861...|    0|
+        |  23643|    150|          6|      series|1533615737|              0|      0.69314|   0.0221|          0|[-0.0905480831861...|[0.11896882951259...|    0|
+        |  60392|    636|         22|      series|1533445757|              0|          0.0|   0.0221|          1|[0.0, 0.0, 0.0, 0...|[0.00568220764398...|    0|
+        +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+         
 
 # Related Papers on CTR prediction
 * [[GBDT+LR]Practical Lessons from Predicting Clicks on Ads at Facebook.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/%5BGBDT%2BLR%5DPractical%20Lessons%20from%20Predicting%20Clicks%20on%20Ads%20at%20Facebook.pdf) <br />
