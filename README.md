@@ -12,7 +12,23 @@ CTR prediction model based on pure Spark MLlib, no third-party library.
 
 # Dataset
 A small portion of some public database for test and initial debug.
-You can directly get comparision among different models on metrics such as AUC on ROC and P-R curve.
+You can directly get comparision among different models on metrics such as AUC on ROC and P-R curve. <br />
+**Data Format**
+        root
+         |-- user_id: integer (nullable = true)
+         |-- item_id: integer (nullable = true)
+         |-- category_id: integer (nullable = true)
+         |-- content_type: string (nullable = true)
+         |-- timestamp: string (nullable = true)
+         |-- user_item_click: long (nullable = true)
+         |-- user_item_imp: double (nullable = true)
+         |-- item_ctr: double (nullable = true)
+         |-- is_new_user: integer (nullable = true)
+         |-- user_embedding: array (nullable = true)
+         |    |-- element: double (containsNull = true)
+         |-- item_embedding: array (nullable = true)
+         |    |-- element: double (containsNull = true)
+         |-- label: integer (nullable = true)
 
 # Related Papers on CTR prediction
 * [[GBDT+LR]Practical Lessons from Predicting Clicks on Ads at Facebook.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/%5BGBDT%2BLR%5DPractical%20Lessons%20from%20Predicting%20Clicks%20on%20Ads%20at%20Facebook.pdf) <br />
