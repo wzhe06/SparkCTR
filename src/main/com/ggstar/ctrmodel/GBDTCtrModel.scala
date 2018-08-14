@@ -2,18 +2,22 @@ package com.ggstar.ctrmodel
 
 import com.ggstar.features.FeatureEngineering
 import org.apache.spark.ml.PipelineModel
-import org.apache.spark.ml.classification.{NaiveBayes, NaiveBayesModel}
+import org.apache.spark.ml.classification.{GBTClassificationModel, GBTClassifier}
 import org.apache.spark.sql.DataFrame
 
-class NaiveBayesCtrModel {
+class GBDTCtrModel {
 
   var _pipelineModel:PipelineModel = null
-  var _model:NaiveBayesModel = null
+  var _model:GBTClassificationModel = null
 
   def train(samples:DataFrame) : Unit = {
     _pipelineModel = new FeatureEngineering().preProcessSamples(samples)
 
-    _model = new NaiveBayes().setFeaturesCol("scaledFeatures").setLabelCol("label")
+    _model = new GBTClassifier()
+      .setLabelCol("label")
+      .setFeaturesCol("scaledFeatures")
+      .setMaxIter(10)
+      .setFeatureSubsetStrategy("auto")
       .fit(_pipelineModel.transform(samples))
   }
 

@@ -1,19 +1,22 @@
 package com.ggstar.ctrmodel
 
 import com.ggstar.features.FeatureEngineering
-import org.apache.spark.ml.PipelineModel
+import org.apache.spark.ml.{PipelineModel}
 import org.apache.spark.ml.classification.{MultilayerPerceptronClassificationModel, MultilayerPerceptronClassifier}
-import org.apache.spark.ml.linalg.DenseVector
+import org.apache.spark.ml.linalg.{DenseVector}
 import org.apache.spark.sql.DataFrame
 
-class NeuralNetworkCtrModel {
+class InnerProductNNCtrModel {
   var _pipelineModel:PipelineModel = null
   var _model:MultilayerPerceptronClassificationModel = null
 
   def train(samples:DataFrame) : Unit = {
-    _pipelineModel = new FeatureEngineering().preProcessSamples(samples)
 
-    val preparedSamples = _pipelineModel.transform(samples)
+    val fe = new FeatureEngineering()
+    val samplesWithInnerProduct = fe.calculateEmbeddingInnerProduct(samples)
+    _pipelineModel = fe.preProcessInnerProductSamples(samplesWithInnerProduct)
+
+    val preparedSamples = _pipelineModel.transform(samplesWithInnerProduct)
 
     val layers = Array[Int](preparedSamples.first().getAs[DenseVector]("scaledFeatures").toArray.length,
       preparedSamples.first().getAs[DenseVector]("scaledFeatures").toArray.length / 2, 2)
@@ -29,6 +32,7 @@ class NeuralNetworkCtrModel {
   }
 
   def transform(samples:DataFrame):DataFrame = {
-    _model.transform(_pipelineModel.transform(samples))
+    val samplesWithInnerProduct = new FeatureEngineering().calculateEmbeddingInnerProduct(samples)
+    _model.transform(_pipelineModel.transform(samplesWithInnerProduct))
   }
 }

@@ -6,14 +6,17 @@ import org.apache.spark.ml.classification.{MultilayerPerceptronClassificationMod
 import org.apache.spark.ml.linalg.DenseVector
 import org.apache.spark.sql.DataFrame
 
-class NeuralNetworkCtrModel {
+class OuterProductNNCtrModel {
   var _pipelineModel:PipelineModel = null
   var _model:MultilayerPerceptronClassificationModel = null
 
   def train(samples:DataFrame) : Unit = {
-    _pipelineModel = new FeatureEngineering().preProcessSamples(samples)
 
-    val preparedSamples = _pipelineModel.transform(samples)
+    val fe = new FeatureEngineering()
+    val samplesWithOuterProduct = fe.calculateEmbeddingOuterProduct(samples)
+    _pipelineModel = fe.preProcessOuterProductSamples(samplesWithOuterProduct)
+
+    val preparedSamples = _pipelineModel.transform(samplesWithOuterProduct)
 
     val layers = Array[Int](preparedSamples.first().getAs[DenseVector]("scaledFeatures").toArray.length,
       preparedSamples.first().getAs[DenseVector]("scaledFeatures").toArray.length / 2, 2)
@@ -29,6 +32,7 @@ class NeuralNetworkCtrModel {
   }
 
   def transform(samples:DataFrame):DataFrame = {
-    _model.transform(_pipelineModel.transform(samples))
+    val samplesWithOuterProduct = new FeatureEngineering().calculateEmbeddingOuterProduct(samples)
+    _model.transform(_pipelineModel.transform(samplesWithOuterProduct))
   }
 }
