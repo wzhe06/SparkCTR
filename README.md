@@ -6,6 +6,7 @@ CTR prediction model based on pure Spark MLlib, no third-party library.
 * Logistic Regression
 * Random Forest
 * Gradient Boosted Decision Tree
+* GBDT + LR
 * Neural Network
 * Inner Product Neural Network (IPNN)
 * Outer Product Neural Network (OPNN)
