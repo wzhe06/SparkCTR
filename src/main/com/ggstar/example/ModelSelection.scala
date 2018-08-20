@@ -30,6 +30,7 @@ object ModelSelection {
     val Array(trainingSamples, validationSamples) = samples.randomSplit(Array(0.7, 0.3))
     val evaluator = new Evaluator
 
+
     println("Naive Bayes Ctr Prediction Model:")
     val nbModel = new NaiveBayesCtrModel()
     nbModel.train(trainingSamples)
@@ -54,6 +55,12 @@ object ModelSelection {
     val gbtModel = new GBDTCtrModel()
     gbtModel.train(trainingSamples)
     evaluator.evaluate(gbtModel.transform(validationSamples))
+
+    println("GBDT+LR Ctr Prediction Model:")
+    val gbtlrModel = new GBTLRCtrModel()
+    gbtlrModel.train(trainingSamples)
+    evaluator.evaluate(gbtlrModel.transform(validationSamples))
+
 
     println("IPNN Ctr Prediction Model:")
     val ipnnModel = new InnerProductNNCtrModel()
