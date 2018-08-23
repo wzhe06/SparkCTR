@@ -12,7 +12,7 @@ CTR prediction model based on pure Spark MLlib, no third-party library.
 * Outer Product Neural Network (OPNN)
 
 # Dataset
-A small portion of some public database for test and initial debug.
+A small portion of some public ads database for test and initial debug.
 You can directly get comparision among different models on metrics such as AUC on ROC and P-R curve. <br /><br />
 **Data Format**
 
@@ -26,22 +26,12 @@ You can directly get comparision among different models on metrics such as AUC o
          |-- user_item_imp: double (the number of user watched the item)
          |-- item_ctr: double (historical CTR of the item)
          |-- is_new_user: integer (is the user a new user)
-         |-- user_embedding: array (embedding of the user, a double array of 50 dimentions)
+         |-- user_embedding: array (embedding of the user)
          |    |-- element: double
-         |-- item_embedding: array (embedding of the item, a double array of 50 dimentions)
+         |-- item_embedding: array (embedding of the item)
          |    |-- element: double
          |-- label: integer (label of the sample 0-negative 1-positive)
-                 
-        Example:
-         
-        +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+
-        |user_id|item_id|category_id|content_type| timestamp|user_item_click|user_item_imp| item_ctr|is_new_user|      user_embedding|      item_embedding|label|
-        +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+
-        |  20143|     52|         16|       movie|1533487890|              0|      0.69314|0.0061725|          0|[0.06483652442693...|[0.0, 0.0, 0.0, 0...|    0|
-        |  18376|     25|          4|       movie|1533527993|              0|          0.0|0.0138948|          0|[0.02370533533394...|[-0.0905480831861...|    0|
-        |  23643|    150|          6|      series|1533615737|              0|      0.69314|   0.0221|          0|[-0.0905480831861...|[0.11896882951259...|    0|
-        |  60392|    636|         22|      series|1533445757|              0|          0.0|   0.0221|          1|[0.0, 0.0, 0.0, 0...|[0.00568220764398...|    0|
-        +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+         
+
 # Usage
 It's a maven project. Spark version is 2.3.0. Scala version is 2.11. <br />
 After dependencies are imported by maven automatically, you can simple run the example function (**com.ggstar.example.ModelSelection**) to train all the CTR models and get the metrics comparison among all the models.
