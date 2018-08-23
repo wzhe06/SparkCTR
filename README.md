@@ -13,7 +13,7 @@ CTR prediction model based on pure Spark MLlib, no third-party library.
 
 # Dataset
 A small portion of some public ads database for test and initial debug.
-You can directly get comparision among different models on metrics such as AUC on ROC and P-R curve. <br /><br />
+You can directly get comparision among different models on metrics such as AUC under ROC and P-R curve. <br /><br />
 **Data Format**
 
         root

@@ -31,10 +31,6 @@ object ModelSelection {
     val evaluator = new Evaluator
 
 
-    println("Naive Bayes Ctr Prediction Model:")
-    val nbModel = new NaiveBayesCtrModel()
-    nbModel.train(trainingSamples)
-    evaluator.evaluate(nbModel.transform(validationSamples))
 
     println("Logistic Regression Ctr Prediction Model:")
     val lrModel = new LogisticRegressionCtrModel()
