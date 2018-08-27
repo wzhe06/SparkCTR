@@ -26,7 +26,7 @@ class FactorizationMachineCtrModel {
       new LabeledPoint(row.getAs[Int]("label").toDouble, Vectors.fromML(row.getAs[DenseVector]("scaledFeatures")))
     })
 
-    _model = FMWithSGD.train(formatSamples, task = 1, numIterations = 150, stepSize = 0.015, miniBatchFraction = 1, dim = (true, true, 2), regParam = (0, 0, 0), initStd = 0.1)
+    _model = FMWithSGD.train(formatSamples, task = 1, numIterations = 200, stepSize = 0.15, miniBatchFraction = 1, dim = (true, true, 2), regParam = (0, 0, 0), initStd = 0.1)
     //_model = FMWithLBFGS.train(formatSamples, task = 1, numIterations = 150, numCorrections = 5, dim = (true, true, 2), regParam = (0, 0, 0), initStd = 0.1)
   }
 
