@@ -1,14 +1,14 @@
 package com.ggstar.ctrmodel
 
 import com.ggstar.features.FeatureEngineering
-import org.apache.spark.ml.{PipelineModel}
+import org.apache.spark.ml.PipelineModel
 import org.apache.spark.ml.classification.{MultilayerPerceptronClassificationModel, MultilayerPerceptronClassifier}
-import org.apache.spark.ml.linalg.{DenseVector}
+import org.apache.spark.ml.linalg.DenseVector
 import org.apache.spark.sql.DataFrame
 
 class InnerProductNNCtrModel {
-  var _pipelineModel:PipelineModel = null
-  var _model:MultilayerPerceptronClassificationModel = null
+  var _pipelineModel:PipelineModel = _
+  var _model:MultilayerPerceptronClassificationModel = _
 
   def train(samples:DataFrame) : Unit = {
 

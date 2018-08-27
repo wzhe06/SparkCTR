@@ -7,8 +7,8 @@ import org.apache.spark.sql.DataFrame
 
 class LogisticRegressionCtrModel {
 
-  var _pipelineModel:PipelineModel = null
-  var _model:LogisticRegressionModel = null
+  var _pipelineModel:PipelineModel = _
+  var _model:LogisticRegressionModel = _
 
   def train(samples:DataFrame) : Unit = {
     _pipelineModel = new FeatureEngineering().preProcessSamples(samples)

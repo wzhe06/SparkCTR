@@ -7,8 +7,8 @@ import org.apache.spark.sql.DataFrame
 
 class NaiveBayesCtrModel {
 
-  var _pipelineModel:PipelineModel = null
-  var _model:NaiveBayesModel = null
+  var _pipelineModel:PipelineModel = _
+  var _model:NaiveBayesModel = _
 
   def train(samples:DataFrame) : Unit = {
     _pipelineModel = new FeatureEngineering().preProcessSamples(samples)

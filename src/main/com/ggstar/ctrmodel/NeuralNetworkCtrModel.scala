@@ -7,8 +7,8 @@ import org.apache.spark.ml.linalg.DenseVector
 import org.apache.spark.sql.DataFrame
 
 class NeuralNetworkCtrModel {
-  var _pipelineModel:PipelineModel = null
-  var _model:MultilayerPerceptronClassificationModel = null
+  var _pipelineModel:PipelineModel = _
+  var _model:MultilayerPerceptronClassificationModel = _
 
   def train(samples:DataFrame) : Unit = {
     _pipelineModel = new FeatureEngineering().preProcessSamples(samples)

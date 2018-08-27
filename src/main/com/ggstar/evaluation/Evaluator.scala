@@ -1,6 +1,5 @@
 package com.ggstar.evaluation
 
-import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.linalg.DenseVector
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.sql.DataFrame
@@ -10,6 +9,7 @@ class Evaluator {
 
     import  predictions.sparkSession.implicits._
 
+    /*
     val evaluator = new MulticlassClassificationEvaluator()
       .setLabelCol("label")
       .setPredictionCol("prediction")
@@ -17,6 +17,9 @@ class Evaluator {
 
     val accuracy = evaluator.evaluate(predictions)
     println(s"Test set accuracy = $accuracy")
+    */
+    //predictions.select("label", "probability").show(1000,false)
+    //predictions.select("label", "probability").printSchema()
 
     val scoreAndLabels = predictions.select("label", "probability").map { row =>
       (row.apply(1).asInstanceOf[DenseVector](1), row.getAs[Int]("label").toDouble)

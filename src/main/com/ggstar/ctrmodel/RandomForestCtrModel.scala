@@ -7,8 +7,8 @@ import org.apache.spark.sql.DataFrame
 
 class RandomForestCtrModel {
 
-  var _pipelineModel:PipelineModel = null
-  var _model:RandomForestClassificationModel = null
+  var _pipelineModel:PipelineModel = _
+  var _model:RandomForestClassificationModel = _
 
   def train(samples:DataFrame) : Unit = {
     _pipelineModel = new FeatureEngineering().preProcessSamples(samples)

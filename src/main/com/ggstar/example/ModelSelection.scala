@@ -15,7 +15,7 @@ object ModelSelection {
     val conf = new SparkConf()
       .setMaster("local[2]")
       .setAppName("ctrModel")
-    val sc = new SparkContext(conf)
+    new SparkContext(conf)
     val spark = SparkSession.builder.appName("ctrModel").getOrCreate()
 
     val resourcesPath = this.getClass.getResource("/samples.snappy.orc")
@@ -36,6 +36,11 @@ object ModelSelection {
     val lrModel = new LogisticRegressionCtrModel()
     lrModel.train(trainingSamples)
     evaluator.evaluate(lrModel.transform(validationSamples))
+
+    println("FM Ctr Prediction Model:")
+    val fmModel = new FactorizationMachineCtrModel()
+    fmModel.train(trainingSamples)
+    evaluator.evaluate(fmModel.transform(validationSamples))
 
     println("Neural Network Ctr Prediction Model:")
     val nnModel = new NeuralNetworkCtrModel()
@@ -62,6 +67,7 @@ object ModelSelection {
     val ipnnModel = new InnerProductNNCtrModel()
     ipnnModel.train(trainingSamples)
     evaluator.evaluate(ipnnModel.transform(validationSamples))
+
 
     println("OPNN Ctr Prediction Model:")
     val opnnModel = new OuterProductNNCtrModel()

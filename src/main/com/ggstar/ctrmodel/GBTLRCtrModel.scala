@@ -7,8 +7,8 @@ import org.apache.spark.sql.DataFrame
 
 class GBTLRCtrModel {
 
-  var _pipelineModel:PipelineModel = null
-  var _model:GBTLRClassificationModel = null
+  var _pipelineModel:PipelineModel = _
+  var _model:GBTLRClassificationModel = _
 
   def train(samples:DataFrame) : Unit = {
     val fe = new FeatureEngineering()

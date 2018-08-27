@@ -4,6 +4,7 @@ CTR prediction model based on pure Spark MLlib, no third-party library.
 # Realized Models
 * Naive Bayes
 * Logistic Regression
+* Factorization Machine
 * Random Forest
 * Gradient Boosted Decision Tree
 * GBDT + LR
