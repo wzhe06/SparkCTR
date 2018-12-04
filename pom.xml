@@ -37,6 +37,26 @@
         </dependency>
 
         <dependency>
+            <groupId>ml.combust.mleap</groupId>
+            <artifactId>mleap-runtime_2.11</artifactId>
+            <version>0.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ml.combust.mleap</groupId>
+            <artifactId>mleap-spark_2.11</artifactId>
+            <version>0.12.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.jsuereth/scala-arm -->
+        <dependency>
+            <groupId>com.jsuereth</groupId>
+            <artifactId>scala-arm_2.11</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-hive_${scala.version}</artifactId>
             <version>${spark.version}</version>
