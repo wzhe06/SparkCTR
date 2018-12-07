@@ -1,4 +1,4 @@
-package com.ggstar.serving.serialization
+package com.ggstar.serving.mleap.serialization
 
 import ml.combust.bundle.BundleFile
 import org.apache.spark.ml.{PipelineModel, Transformer}

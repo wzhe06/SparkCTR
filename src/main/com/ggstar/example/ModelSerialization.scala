@@ -2,7 +2,7 @@ package com.ggstar.example
 
 import com.ggstar.ctrmodel._
 import com.ggstar.features.FeatureEngineering
-import com.ggstar.serving.serialization.ModelSerializer
+import com.ggstar.serving.mleap.serialization.ModelSerializer
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
@@ -31,12 +31,14 @@ object ModelSerialization {
 
     //model training
     println("Neural Network Ctr Prediction Model:")
-    val lrModel = new LogisticRegressionCtrModel()
-    lrModel.train(samples)
-    val transformedData = lrModel.transform(samples)
+    val innModel = new InnerProductNNCtrModel()
+    innModel.train(samples)
+    val transformedData = innModel.transform(samples)
+
+    transformedData.show(1,false)
 
     //model serialization
     val modelSerializer = new ModelSerializer()
-    modelSerializer.serializeModel(lrModel._pipelineModel, lrModel._model, "jar:file:/Users/zhwang/Workspace/CTRmodel/model/lr.model.zip", transformedData)
+    modelSerializer.serializeModel(innModel._pipelineModel, innModel._model, "jar:file:/Users/zhwang/Workspace/CTRmodel/model/inn.model.zip", transformedData)
   }
 }
