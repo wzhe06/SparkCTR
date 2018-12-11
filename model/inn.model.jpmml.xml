@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+    <Header>
+        <Application name="JPMML-SparkML" version="1.4.6"/>
+        <Timestamp>2018-12-11T00:27:58Z</Timestamp>
+    </Header>
+    <DataDictionary>
+        <DataField name="content_type" optype="categorical" dataType="string">
+            <Value value="movie"/>
+            <Value value="series"/>
+        </DataField>
+        <DataField name="item_ctr" optype="continuous" dataType="double"/>
+        <DataField name="user_item_click" optype="continuous" dataType="integer"/>
+        <DataField name="user_item_imp" optype="continuous" dataType="double"/>
+        <DataField name="is_new_user" optype="continuous" dataType="integer"/>
+        <DataField name="embedding_inner_product" optype="continuous" dataType="double"/>
+        <DataField name="label" optype="categorical" dataType="integer">
+            <Value value="0"/>
+            <Value value="1"/>
+        </DataField>
+    </DataDictionary>
+    <TransformationDictionary>
+        <DerivedField name="ctr_bucket" optype="continuous" dataType="integer">
+            <Discretize field="item_ctr">
+                <DiscretizeBin binValue="0">
+                    <Interval closure="closedOpen" rightMargin="4.083924651590178E-4"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="1">
+                    <Interval closure="closedOpen" leftMargin="4.083924651590178E-4" rightMargin="9.190233897369148E-4"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="2">
+                    <Interval closure="closedOpen" leftMargin="9.190233897369148E-4" rightMargin="0.0016314451568843192"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="3">
+                    <Interval closure="closedOpen" leftMargin="0.0016314451568843192" rightMargin="0.0020618079043691795"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="4">
+                    <Interval closure="closedOpen" leftMargin="0.0020618079043691795" rightMargin="0.002318840579710145"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="5">
+                    <Interval closure="closedOpen" leftMargin="0.002318840579710145" rightMargin="0.002611818478615736"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="6">
+                    <Interval closure="closedOpen" leftMargin="0.002611818478615736" rightMargin="0.0030195030195030196"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="7">
+                    <Interval closure="closedOpen" leftMargin="0.0030195030195030196" rightMargin="0.003248741778286688"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="8">
+                    <Interval closure="closedOpen" leftMargin="0.003248741778286688" rightMargin="0.0035089986093212876"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="9">
+                    <Interval closure="closedOpen" leftMargin="0.0035089986093212876" rightMargin="0.003705390086511438"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="10">
+                    <Interval closure="closedOpen" leftMargin="0.003705390086511438" rightMargin="0.003945032546518509"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="11">
+                    <Interval closure="closedOpen" leftMargin="0.003945032546518509" rightMargin="0.00421664167916042"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="12">
+                    <Interval closure="closedOpen" leftMargin="0.00421664167916042" rightMargin="0.0044207090936062895"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="13">
+                    <Interval closure="closedOpen" leftMargin="0.0044207090936062895" rightMargin="0.004677114958562403"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="14">
+                    <Interval closure="closedOpen" leftMargin="0.004677114958562403" rightMargin="0.004910767756617559"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="15">
+                    <Interval closure="closedOpen" leftMargin="0.004910767756617559" rightMargin="0.005073012135990359"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="16">
+                    <Interval closure="closedOpen" leftMargin="0.005073012135990359" rightMargin="0.005245778297943488"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="17">
+                    <Interval closure="closedOpen" leftMargin="0.005245778297943488" rightMargin="0.0054361391143958274"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="18">
+                    <Interval closure="closedOpen" leftMargin="0.0054361391143958274" rightMargin="0.005609551398326881"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="19">
+                    <Interval closure="closedOpen" leftMargin="0.005609551398326881" rightMargin="0.0057458744077119985"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="20">
+                    <Interval closure="closedOpen" leftMargin="0.0057458744077119985" rightMargin="0.0059683910866791005"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="21">
+                    <Interval closure="closedOpen" leftMargin="0.0059683910866791005" rightMargin="0.006081754842809286"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="22">
+                    <Interval closure="closedOpen" leftMargin="0.006081754842809286" rightMargin="0.006223672725892755"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="23">
+                    <Interval closure="closedOpen" leftMargin="0.006223672725892755" rightMargin="0.006344692443722219"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="24">
+                    <Interval closure="closedOpen" leftMargin="0.006344692443722219" rightMargin="0.006525943668105491"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="25">
+                    <Interval closure="closedOpen" leftMargin="0.006525943668105491" rightMargin="0.006688434800926901"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="26">
+                    <Interval closure="closedOpen" leftMargin="0.006688434800926901" rightMargin="0.006859280814799418"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="27">
+                    <Interval closure="closedOpen" leftMargin="0.006859280814799418" rightMargin="0.007007896049541932"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="28">
+                    <Interval closure="closedOpen" leftMargin="0.007007896049541932" rightMargin="0.007165304839723444"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="29">
+                    <Interval closure="closedOpen" leftMargin="0.007165304839723444" rightMargin="0.007357904684757661"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="30">
+                    <Interval closure="closedOpen" leftMargin="0.007357904684757661" rightMargin="0.007524626652571781"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="31">
+                    <Interval closure="closedOpen" leftMargin="0.007524626652571781" rightMargin="0.007669172932330827"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="32">
+                    <Interval closure="closedOpen" leftMargin="0.007669172932330827" rightMargin="0.007883763356789157"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="33">
+                    <Interval closure="closedOpen" leftMargin="0.007883763356789157" rightMargin="0.008063698143827975"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="34">
+                    <Interval closure="closedOpen" leftMargin="0.008063698143827975" rightMargin="0.008310893010921716"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="35">
+                    <Interval closure="closedOpen" leftMargin="0.008310893010921716" rightMargin="0.008480435083191224"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="36">
+                    <Interval closure="closedOpen" leftMargin="0.008480435083191224" rightMargin="0.008686636590355032"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="37">
+                    <Interval closure="closedOpen" leftMargin="0.008686636590355032" rightMargin="0.008889724057183331"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="38">
+                    <Interval closure="closedOpen" leftMargin="0.008889724057183331" rightMargin="0.00907704417986815"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="39">
+                    <Interval closure="closedOpen" leftMargin="0.00907704417986815" rightMargin="0.009272183449651047"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="40">
+                    <Interval closure="closedOpen" leftMargin="0.009272183449651047" rightMargin="0.009473724913963111"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="41">
+                    <Interval closure="closedOpen" leftMargin="0.009473724913963111" rightMargin="0.009652989012353343"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="42">
+                    <Interval closure="closedOpen" leftMargin="0.009652989012353343" rightMargin="0.00986134353334927"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="43">
+                    <Interval closure="closedOpen" leftMargin="0.00986134353334927" rightMargin="0.010065534595749303"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="44">
+                    <Interval closure="closedOpen" leftMargin="0.010065534595749303" rightMargin="0.010213453623828679"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="45">
+                    <Interval closure="closedOpen" leftMargin="0.010213453623828679" rightMargin="0.010457010069713401"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="46">
+                    <Interval closure="closedOpen" leftMargin="0.010457010069713401" rightMargin="0.010618093922651934"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="47">
+                    <Interval closure="closedOpen" leftMargin="0.010618093922651934" rightMargin="0.010802469135802469"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="48">
+                    <Interval closure="closedOpen" leftMargin="0.010802469135802469" rightMargin="0.010990869124112276"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="49">
+                    <Interval closure="closedOpen" leftMargin="0.010990869124112276" rightMargin="0.011116790186557628"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="50">
+                    <Interval closure="closedOpen" leftMargin="0.011116790186557628" rightMargin="0.011272733637907192"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="51">
+                    <Interval closure="closedOpen" leftMargin="0.011272733637907192" rightMargin="0.011382098550942405"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="52">
+                    <Interval closure="closedOpen" leftMargin="0.011382098550942405" rightMargin="0.01149076244731376"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="53">
+                    <Interval closure="closedOpen" leftMargin="0.01149076244731376" rightMargin="0.01162469210274971"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="54">
+                    <Interval closure="closedOpen" leftMargin="0.01162469210274971" rightMargin="0.01177717503563967"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="55">
+                    <Interval closure="closedOpen" leftMargin="0.01177717503563967" rightMargin="0.011879049676025918"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="56">
+                    <Interval closure="closedOpen" leftMargin="0.011879049676025918" rightMargin="0.012015650637384828"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="57">
+                    <Interval closure="closedOpen" leftMargin="0.012015650637384828" rightMargin="0.012196958289414245"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="58">
+                    <Interval closure="closedOpen" leftMargin="0.012196958289414245" rightMargin="0.012406486687421588"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="59">
+                    <Interval closure="closedOpen" leftMargin="0.012406486687421588" rightMargin="0.012574222843171499"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="60">
+                    <Interval closure="closedOpen" leftMargin="0.012574222843171499" rightMargin="0.012728078771757897"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="61">
+                    <Interval closure="closedOpen" leftMargin="0.012728078771757897" rightMargin="0.012836378636771735"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="62">
+                    <Interval closure="closedOpen" leftMargin="0.012836378636771735" rightMargin="0.01306680512287989"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="63">
+                    <Interval closure="closedOpen" leftMargin="0.01306680512287989" rightMargin="0.013259615230074415"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="64">
+                    <Interval closure="closedOpen" leftMargin="0.013259615230074415" rightMargin="0.013496932515337423"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="65">
+                    <Interval closure="closedOpen" leftMargin="0.013496932515337423" rightMargin="0.013694743412714925"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="66">
+                    <Interval closure="closedOpen" leftMargin="0.013694743412714925" rightMargin="0.013883721968423088"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="67">
+                    <Interval closure="closedOpen" leftMargin="0.013883721968423088" rightMargin="0.014126382831011636"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="68">
+                    <Interval closure="closedOpen" leftMargin="0.014126382831011636" rightMargin="0.014316862374234901"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="69">
+                    <Interval closure="closedOpen" leftMargin="0.014316862374234901" rightMargin="0.01463323702115761"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="70">
+                    <Interval closure="closedOpen" leftMargin="0.01463323702115761" rightMargin="0.014985763524651582"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="71">
+                    <Interval closure="closedOpen" leftMargin="0.014985763524651582" rightMargin="0.0151894911671448"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="72">
+                    <Interval closure="closedOpen" leftMargin="0.0151894911671448" rightMargin="0.0155596579135742"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="73">
+                    <Interval closure="closedOpen" leftMargin="0.0155596579135742" rightMargin="0.01591483528252581"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="74">
+                    <Interval closure="closedOpen" leftMargin="0.01591483528252581" rightMargin="0.016469696447644972"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="75">
+                    <Interval closure="closedOpen" leftMargin="0.016469696447644972" rightMargin="0.01692466460268318"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="76">
+                    <Interval closure="closedOpen" leftMargin="0.01692466460268318" rightMargin="0.017481451367008842"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="77">
+                    <Interval closure="closedOpen" leftMargin="0.017481451367008842" rightMargin="0.01811028539311809"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="78">
+                    <Interval closure="closedOpen" leftMargin="0.01811028539311809" rightMargin="0.01879155825383059"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="79">
+                    <Interval closure="closedOpen" leftMargin="0.01879155825383059" rightMargin="0.01949769869169717"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="80">
+                    <Interval closure="closedOpen" leftMargin="0.01949769869169717" rightMargin="0.020256404598512766"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="81">
+                    <Interval closure="closedOpen" leftMargin="0.020256404598512766" rightMargin="0.02054821534214159"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="82">
+                    <Interval closure="closedOpen" leftMargin="0.02054821534214159" rightMargin="0.021258407545184686"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="83">
+                    <Interval closure="closedOpen" leftMargin="0.021258407545184686" rightMargin="0.021764076380561895"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="84">
+                    <Interval closure="closedOpen" leftMargin="0.021764076380561895" rightMargin="0.0221"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="85">
+                    <Interval closure="closedOpen" leftMargin="0.0221" rightMargin="0.022235442849706254"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="86">
+                    <Interval closure="closedOpen" leftMargin="0.022235442849706254" rightMargin="0.02337452982267598"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="87">
+                    <Interval closure="closedOpen" leftMargin="0.02337452982267598" rightMargin="0.02425564681724846"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="88">
+                    <Interval closure="closedOpen" leftMargin="0.02425564681724846" rightMargin="0.026379877851557296"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="89">
+                    <Interval closure="closedOpen" leftMargin="0.026379877851557296" rightMargin="0.029274589315505545"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="90">
+                    <Interval closure="closedOpen" leftMargin="0.029274589315505545" rightMargin="0.03215132975402672"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="91">
+                    <Interval closure="closedOpen" leftMargin="0.03215132975402672" rightMargin="0.03406963389499851"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="92">
+                    <Interval closure="closedOpen" leftMargin="0.03406963389499851" rightMargin="0.03543536542720597"/>
+                </DiscretizeBin>
+                <DiscretizeBin binValue="93">
+                    <Interval closure="closedClosed" leftMargin="0.03543536542720597"/>
+                </DiscretizeBin>
+            </Discretize>
+        </DerivedField>
+        <DerivedField name="content_type=movie" optype="continuous" dataType="double">
+            <NormDiscrete field="content_type" value="movie"/>
+        </DerivedField>
+        <DerivedField name="scaledFeatures[0]" optype="continuous" dataType="double">
+            <Apply function="/">
+                <Apply function="-">
+                    <FieldRef field="content_type=movie"/>
+                    <Constant dataType="double">0.0</Constant>
+                </Apply>
+                <Constant dataType="double">1.0</Constant>
+            </Apply>
+        </DerivedField>
+        <DerivedField name="content_type=series" optype="continuous" dataType="double">
+            <NormDiscrete field="content_type" value="series"/>
+        </DerivedField>
+        <DerivedField name="scaledFeatures[1]" optype="continuous" dataType="double">
+            <Apply function="/">
+                <Apply function="-">
+                    <FieldRef field="content_type=series"/>
+                    <Constant dataType="double">0.0</Constant>
+                </Apply>
+                <Constant dataType="double">1.0</Constant>
+            </Apply>
+        </DerivedField>
+        <DerivedField name="scaledFeatures[2]" optype="continuous" dataType="double">
+            <Apply function="/">
+                <Apply function="-">
+                    <FieldRef field="ctr_bucket"/>
+                    <Constant dataType="double">0.0</Constant>
+                </Apply>
+                <Constant dataType="double">93.0</Constant>
+            </Apply>
+        </DerivedField>
+        <DerivedField name="scaledFeatures[3]" optype="continuous" dataType="double">
+            <Apply function="/">
+                <Apply function="-">
+                    <FieldRef field="user_item_click"/>
+                    <Constant dataType="double">0.0</Constant>
+                </Apply>
+                <Constant dataType="double">17.0</Constant>
+            </Apply>
+        </DerivedField>
+        <DerivedField name="scaledFeatures[4]" optype="continuous" dataType="double">
+            <Apply function="/">
+                <Apply function="-">
+                    <FieldRef field="user_item_imp"/>
+                    <Constant dataType="double">0.0</Constant>
+                </Apply>
+                <Constant dataType="double">8.869257522797287</Constant>
+            </Apply>
+        </DerivedField>
+        <DerivedField name="scaledFeatures[5]" optype="continuous" dataType="double">
+            <Apply function="/">
+                <Apply function="-">
+                    <FieldRef field="is_new_user"/>
+                    <Constant dataType="double">0.0</Constant>
+                </Apply>
+                <Constant dataType="double">1.0</Constant>
+            </Apply>
+        </DerivedField>
+        <DerivedField name="scaledFeatures[6]" optype="continuous" dataType="double">
+            <Apply function="/">
+                <Apply function="-">
+                    <FieldRef field="embedding_inner_product"/>
+                    <Constant dataType="double">-0.32890289521601157</Constant>
+                </Apply>
+                <Constant dataType="double">1.3289028952160122</Constant>
+            </Apply>
+        </DerivedField>
+    </TransformationDictionary>
+    <NeuralNetwork functionName="classification" activationFunction="logistic">
+        <MiningSchema>
+            <MiningField name="label" usageType="target"/>
+            <MiningField name="user_item_click"/>
+            <MiningField name="user_item_imp"/>
+            <MiningField name="is_new_user"/>
+            <MiningField name="embedding_inner_product"/>
+            <MiningField name="content_type"/>
+            <MiningField name="item_ctr"/>
+        </MiningSchema>
+        <Output>
+            <OutputField name="pmml(prediction)" optype="categorical" dataType="integer" feature="predictedValue"/>
+            <OutputField name="prediction" optype="categorical" dataType="double" feature="transformedValue">
+                <MapValues outputColumn="data:output">
+                    <FieldColumnPair field="pmml(prediction)" column="data:input"/>
+                    <InlineTable>
+                        <row>
+                            <data:input>0</data:input>
+                            <data:output>0</data:output>
+                        </row>
+                        <row>
+                            <data:input>1</data:input>
+                            <data:output>1</data:output>
+                        </row>
+                    </InlineTable>
+                </MapValues>
+            </OutputField>
+            <OutputField name="probability(0)" optype="continuous" dataType="double" feature="probability" value="0"/>
+            <OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+        </Output>
+        <NeuralInputs>
+            <NeuralInput id="input/1">
+                <DerivedField optype="continuous" dataType="double">
+                    <FieldRef field="scaledFeatures[0]"/>
+                </DerivedField>
+            </NeuralInput>
+            <NeuralInput id="input/2">
+                <DerivedField optype="continuous" dataType="double">
+                    <FieldRef field="scaledFeatures[1]"/>
+                </DerivedField>
+            </NeuralInput>
+            <NeuralInput id="input/3">
+                <DerivedField optype="continuous" dataType="double">
+                    <FieldRef field="scaledFeatures[2]"/>
+                </DerivedField>
+            </NeuralInput>
+            <NeuralInput id="input/4">
+                <DerivedField optype="continuous" dataType="double">
+                    <FieldRef field="scaledFeatures[3]"/>
+                </DerivedField>
+            </NeuralInput>
+            <NeuralInput id="input/5">
+                <DerivedField optype="continuous" dataType="double">
+                    <FieldRef field="scaledFeatures[4]"/>
+                </DerivedField>
+            </NeuralInput>
+            <NeuralInput id="input/6">
+                <DerivedField optype="continuous" dataType="double">
+                    <FieldRef field="scaledFeatures[5]"/>
+                </DerivedField>
+            </NeuralInput>
+            <NeuralInput id="input/7">
+                <DerivedField optype="continuous" dataType="double">
+                    <FieldRef field="scaledFeatures[6]"/>
+                </DerivedField>
+            </NeuralInput>
+        </NeuralInputs>
+        <NeuralLayer>
+            <Neuron id="1/1" bias="0.10821106718224807">
+                <Con from="input/1" weight="7.4158800534998415"/>
+                <Con from="input/2" weight="-6.070759979235586"/>
+                <Con from="input/3" weight="0.6100101719515445"/>
+                <Con from="input/4" weight="3.9824460081767588"/>
+                <Con from="input/5" weight="0.6887823107311685"/>
+                <Con from="input/6" weight="-2.312955573745862"/>
+                <Con from="input/7" weight="0.5744933930473881"/>
+            </Neuron>
+            <Neuron id="1/2" bias="7.724919390429448">
+                <Con from="input/1" weight="-7.877489337161427"/>
+                <Con from="input/2" weight="16.102657157262858"/>
+                <Con from="input/3" weight="-0.574322416659433"/>
+                <Con from="input/4" weight="-9.052147320695367"/>
+                <Con from="input/5" weight="1.446872262529019"/>
+                <Con from="input/6" weight="-1.1666234973430543"/>
+                <Con from="input/7" weight="-1.4301013745226279"/>
+            </Neuron>
+            <Neuron id="1/3" bias="6.178231499154114">
+                <Con from="input/1" weight="-7.828092740188026"/>
+                <Con from="input/2" weight="14.913477905278286"/>
+                <Con from="input/3" weight="-5.537300486986441"/>
+                <Con from="input/4" weight="-9.53419994442785"/>
+                <Con from="input/5" weight="-0.31034203112906017"/>
+                <Con from="input/6" weight="7.025683153503286"/>
+                <Con from="input/7" weight="0.9261008781780328"/>
+            </Neuron>
+        </NeuralLayer>
+        <NeuralLayer activationFunction="identity" normalizationMethod="softmax">
+            <Neuron id="2/1" bias="5.3014576554877495">
+                <Con from="1/1" weight="-4.411423237039245"/>
+                <Con from="1/2" weight="5.917952261903428"/>
+                <Con from="1/3" weight="-0.0020390453880317454"/>
+            </Neuron>
+            <Neuron id="2/2" bias="-4.484682941980783">
+                <Con from="1/1" weight="3.6380923296236425"/>
+                <Con from="1/2" weight="-3.918333126547335"/>
+                <Con from="1/3" weight="-2.2003957185251064"/>
+            </Neuron>
+        </NeuralLayer>
+        <NeuralOutputs>
+            <NeuralOutput outputNeuron="2/1">
+                <DerivedField optype="categorical" dataType="integer">
+                    <NormDiscrete field="label" value="0"/>
+                </DerivedField>
+            </NeuralOutput>
+            <NeuralOutput outputNeuron="2/2">
+                <DerivedField optype="categorical" dataType="integer">
+                    <NormDiscrete field="label" value="1"/>
+                </DerivedField>
+            </NeuralOutput>
+        </NeuralOutputs>
+    </NeuralNetwork>
+</PMML>

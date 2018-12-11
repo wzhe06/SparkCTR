@@ -29,7 +29,7 @@ public class MleapJavaModelServing {
 
         Row features = builder.createRow(20143, 52, 16, "movie", "1533487890", 0L, 0.69314718d, 0.00617256d, 0, 0.5);
 
-        JavaModelServer javaModelServer = new JavaModelServer("/Users/zhwang/Workspace/CTRmodel/model/inn.model.zip", schema);
+        JavaModelServer javaModelServer = new JavaModelServer("model/inn.model.mleap.zip", schema);
         Row result = javaModelServer.forecast(features);
 
         for(int i = 0 ; i < result.size(); i++){
