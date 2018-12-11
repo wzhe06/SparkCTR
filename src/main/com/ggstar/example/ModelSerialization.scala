@@ -2,7 +2,6 @@ package com.ggstar.example
 
 import com.ggstar.ctrmodel._
 import com.ggstar.features.FeatureEngineering
-import com.ggstar.serving.mleap.serialization.ModelSerializer
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
@@ -23,7 +22,7 @@ object ModelSerialization {
 
 
     //transform array to vector for following vectorAssembler
-    val samples = new FeatureEngineering().transferArray2Vector(rawSamples)
+    val samples = FeatureEngineering.transferArray2Vector(rawSamples)
 
     samples.printSchema()
     samples.show(5, false)
@@ -37,8 +36,12 @@ object ModelSerialization {
 
     transformedData.show(1,false)
 
-    //model serialization
-    val modelSerializer = new ModelSerializer()
-    modelSerializer.serializeModel(innModel._pipelineModel, innModel._model, "jar:file:/Users/zhwang/Workspace/CTRmodel/model/inn.model.zip", transformedData)
+    //model serialization by mleap
+    val mleapModelSerializer = new com.ggstar.serving.mleap.serialization.ModelSerializer()
+    mleapModelSerializer.serializeModel(innModel._pipelineModel, "jar:file:/Users/zhwang/Workspace/CTRmodel/model/inn.model.mleap.zip", transformedData)
+
+    //model serialization by JPMML
+    val jpmmlModelSerializer = new com.ggstar.serving.jpmml.serialization.ModelSerializer()
+    jpmmlModelSerializer.serializeModel(innModel._pipelineModel, "model/inn.model.jpmml.xml", transformedData)
   }
 }

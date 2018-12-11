@@ -24,13 +24,11 @@ object ModelSelection {
     rawSamples.show(10)
 
     //transform array to vector for following vectorAssembler
-    val samples = new FeatureEngineering().transferArray2Vector(rawSamples)
+    val samples = FeatureEngineering.transferArray2Vector(rawSamples)
 
     //split samples into training samples and validation samples
     val Array(trainingSamples, validationSamples) = samples.randomSplit(Array(0.7, 0.3))
     val evaluator = new Evaluator
-
-
 
     println("Logistic Regression Ctr Prediction Model:")
     val lrModel = new LogisticRegressionCtrModel()

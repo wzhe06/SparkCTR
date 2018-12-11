@@ -1,28 +1,25 @@
 package com.ggstar.ctrmodel
 
 import com.ggstar.features.FeatureEngineering
-import org.apache.spark.ml.PipelineModel
-import org.apache.spark.ml.classification.{LogisticRegression, LogisticRegressionModel}
+import org.apache.spark.ml.{Pipeline, PipelineStage}
+import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.sql.DataFrame
 
-class LogisticRegressionCtrModel {
-
-  var _pipelineModel:PipelineModel = _
-  var _model:LogisticRegressionModel = _
+class LogisticRegressionCtrModel extends BaseCtrModel {
 
   def train(samples:DataFrame) : Unit = {
-    _pipelineModel = new FeatureEngineering().preProcessSamples(samples)
 
-    _model = new LogisticRegression()
+    val featureEngineeringStages:Array[PipelineStage] = FeatureEngineering.preProcessSamplesStages()
+
+    val model:LogisticRegression = new LogisticRegression()
       .setMaxIter(20)           //max iteration
       .setRegParam(0.0)         //regularization parameter
       .setElasticNetParam(0.0)  //0-L2 regularization 1-L1 regularization
       .setFeaturesCol("scaledFeatures")
       .setLabelCol("label")
-      .fit(_pipelineModel.transform(samples))
-  }
 
-  def transform(samples:DataFrame):DataFrame = {
-    _model.transform(_pipelineModel.transform(samples))
+    val pipelineStages = featureEngineeringStages ++ Array(model)
+
+    _pipelineModel = new Pipeline().setStages(pipelineStages).fit(samples)
   }
 }

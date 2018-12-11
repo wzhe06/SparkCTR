@@ -11,7 +11,7 @@ import ml.combust.mleap.tensor.DenseTensor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JavaModelServing {
+public class MleapJavaModelServing {
     public static void main(String[] args){
         LeapFrameBuilder builder = new LeapFrameBuilder();
         List<StructField> fields = new ArrayList<StructField>();

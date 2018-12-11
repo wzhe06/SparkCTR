@@ -1,32 +1,32 @@
 package com.ggstar.ctrmodel
 
 import com.ggstar.features.FeatureEngineering
-import org.apache.spark.ml.PipelineModel
-import org.apache.spark.ml.gbtlr.{GBTLRClassificationModel, GBTLRClassifier}
+import org.apache.spark.ml.{Pipeline, PipelineStage}
+import org.apache.spark.ml.gbtlr.GBTLRClassifier
 import org.apache.spark.sql.DataFrame
 
-class GBTLRCtrModel {
-
-  var _pipelineModel:PipelineModel = _
-  var _model:GBTLRClassificationModel = _
+class GBTLRCtrModel extends BaseCtrModel {
 
   def train(samples:DataFrame) : Unit = {
-    val fe = new FeatureEngineering()
-    val samplesWithInnerProduct = fe.calculateEmbeddingInnerProduct(samples)
-    _pipelineModel = fe.preProcessInnerProductSamples(samplesWithInnerProduct)
+    val samplesWithInnerProduct = FeatureEngineering.calculateEmbeddingInnerProduct(samples)
 
-    _model = new GBTLRClassifier()
+    val featureEngineeringStages:Array[PipelineStage] = FeatureEngineering.preProcessInnerProductSamplesStages()
+
+    val model = new GBTLRClassifier()
       .setFeaturesCol("scaledFeatures")
       .setLabelCol("label")
       .setGBTMaxIter(10)
       .setLRMaxIter(100)
       .setRegParam(0.01)
       .setElasticNetParam(0.5)
-      .fit(_pipelineModel.transform(samplesWithInnerProduct))
+
+    val pipelineStages = featureEngineeringStages ++ Array(model)
+
+    _pipelineModel = new Pipeline().setStages(pipelineStages).fit(samplesWithInnerProduct)
   }
 
-  def transform(samples:DataFrame):DataFrame = {
-    val samplesWithInnerProduct = new FeatureEngineering().calculateEmbeddingInnerProduct(samples)
-    _model.transform(_pipelineModel.transform(samplesWithInnerProduct))
+  override def transform(samples:DataFrame):DataFrame = {
+    val samplesWithInnerProduct = FeatureEngineering.calculateEmbeddingInnerProduct(samples)
+    _pipelineModel.transform(samplesWithInnerProduct)
   }
 }

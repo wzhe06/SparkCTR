@@ -9,8 +9,8 @@ import org.apache.spark.sql.DataFrame
 import resource.managed
 
 class ModelSerializer {
-  def serializeModel(pipelineModel:PipelineModel, model:Transformer, modelSavePath:String, transformedData:DataFrame): Unit ={
-    val pipeline = SparkUtil.createPipelineModel(uid = "pipeline", Array(pipelineModel, model))
+  def serializeModel(pipelineModel:PipelineModel, modelSavePath:String, transformedData:DataFrame): Unit ={
+    val pipeline = SparkUtil.createPipelineModel(uid = "pipeline", Array(pipelineModel))
 
     val sbc = SparkBundleContext().withDataset(transformedData)
     for(bf <- managed(BundleFile(modelSavePath))) {
