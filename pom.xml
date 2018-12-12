@@ -71,19 +71,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jpmml</groupId>
-            <artifactId>pmml-evaluator-extension</artifactId>
-            <version>1.4.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jpmml</groupId>
-            <artifactId>pmml-model</artifactId>
-            <version>1.4.6</version>
-        </dependency>
-
-
-        <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-hive_${scala.version}</artifactId>
             <version>${spark.version}</version>

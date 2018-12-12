@@ -5,7 +5,7 @@ import ml.combust.mleap.core.types.{ScalarType, StructField, StructType}
 import ml.combust.mleap.runtime.frame.Row
 import ml.combust.mleap.tensor.Tensor
 
-object MleapModelServing {
+object MLeapModelServing {
   def main(args: Array[String]): Unit = {
     //model load
     val dataSchema = StructType(

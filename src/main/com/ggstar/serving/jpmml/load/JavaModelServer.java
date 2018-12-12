@@ -1,13 +1,5 @@
 package com.ggstar.serving.jpmml.load;
 
-import ml.combust.mleap.core.types.StructType;
-import ml.combust.mleap.runtime.MleapContext;
-import ml.combust.mleap.runtime.frame.DefaultLeapFrame;
-import ml.combust.mleap.runtime.frame.Row;
-import ml.combust.mleap.runtime.frame.Transformer;
-import ml.combust.mleap.runtime.javadsl.BundleBuilder;
-import ml.combust.mleap.runtime.javadsl.ContextBuilder;
-import ml.combust.mleap.runtime.javadsl.LeapFrameBuilder;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMML;
 import org.jpmml.evaluator.Evaluator;
@@ -18,7 +10,6 @@ import org.jpmml.evaluator.ModelEvaluatorFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;

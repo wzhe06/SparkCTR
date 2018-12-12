@@ -11,10 +11,10 @@ import java.util.ArrayList;
 
 public class JavaModelServer {
 
-    String modelPath;
-    StructType dataSchema;
+    private String modelPath;
+    private StructType dataSchema;
 
-    Transformer model;
+    private Transformer model;
 
     public JavaModelServer(String modelPath, StructType dataSchema){
         this.modelPath = modelPath;

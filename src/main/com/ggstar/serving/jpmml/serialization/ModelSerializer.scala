@@ -3,7 +3,7 @@ package com.ggstar.serving.jpmml.serialization
 import java.io.{File, FileOutputStream}
 
 import javax.xml.transform.stream.StreamResult
-import org.apache.spark.ml.{PipelineModel, Transformer}
+import org.apache.spark.ml.PipelineModel
 import org.apache.spark.sql.DataFrame
 import org.dmg.pmml.PMML
 import org.jpmml.model.JAXBUtil

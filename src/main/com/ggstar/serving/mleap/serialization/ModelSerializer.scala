@@ -1,7 +1,7 @@
 package com.ggstar.serving.mleap.serialization
 
 import ml.combust.bundle.BundleFile
-import org.apache.spark.ml.{PipelineModel, Transformer}
+import org.apache.spark.ml.PipelineModel
 import org.apache.spark.ml.bundle.SparkBundleContext
 import org.apache.spark.ml.mleap.SparkUtil
 import ml.combust.mleap.spark.SparkSupport._

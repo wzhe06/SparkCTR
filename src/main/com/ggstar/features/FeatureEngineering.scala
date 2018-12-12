@@ -46,22 +46,22 @@ object FeatureEngineering {
     import samples.sparkSession.implicits._
 
     samples.map(row => {
-      val user_embedding = row.getAs[DenseVector]("user_embedding")
-      val item_embedding = row.getAs[DenseVector]("item_embedding")
-      var asquare = 0.0
-      var bsquare = 0.0
-      var abmul = 0.0
+      val userEmbedding = row.getAs[DenseVector]("user_embedding")
+      val itemEmbedding = row.getAs[DenseVector]("item_embedding")
+      var aSquare = 0.0
+      var bSquare = 0.0
+      var abProduct = 0.0
 
-      for (i <-0 until user_embedding.size){
-        asquare += user_embedding(i) * user_embedding(i)
-        bsquare += item_embedding(i) * item_embedding(i)
-        abmul += user_embedding(i) * item_embedding(i)
+      for (i <-0 until userEmbedding.size){
+        aSquare += userEmbedding(i) * userEmbedding(i)
+        bSquare += itemEmbedding(i) * itemEmbedding(i)
+        abProduct += userEmbedding(i) * itemEmbedding(i)
       }
-      var inner_product = 0.0
-      if (asquare == 0 || bsquare == 0){
-        inner_product = 0.0
+      var innerProduct = 0.0
+      if (aSquare == 0 || bSquare == 0){
+        innerProduct = 0.0
       }else{
-        inner_product = abmul / (Math.sqrt(asquare) * Math.sqrt(bsquare))
+        innerProduct = abProduct / (Math.sqrt(aSquare) * Math.sqrt(bSquare))
       }
 
       (row.getAs[Int]("user_id"),
@@ -73,7 +73,7 @@ object FeatureEngineering {
         row.getAs[Double]("user_item_imp"),
         row.getAs[Double]("item_ctr"),
         row.getAs[Int]("is_new_user"),
-        inner_product,
+        innerProduct,
         row.getAs[Int]("label")
       )
     }).toDF(
@@ -139,7 +139,7 @@ object FeatureEngineering {
       .setOutputCols(Array("content_type_vector"))
       .setDropLast(false)
 
-    val ctr_discretizer = new QuantileDiscretizer()
+    val ctrDiscretizer = new QuantileDiscretizer()
       .setInputCol("item_ctr")
       .setOutputCol("ctr_bucket")
       .setNumBuckets(100)
@@ -157,7 +157,7 @@ object FeatureEngineering {
       .setWithMean(true)
     */
 
-    val pipelineStage: Array[PipelineStage] = Array(contentTypeIndexer, oneHotEncoder, ctr_discretizer, vectorAssembler, scaler)
+    val pipelineStage: Array[PipelineStage] = Array(contentTypeIndexer, oneHotEncoder, ctrDiscretizer, vectorAssembler, scaler)
     val featurePipeline = new Pipeline().setStages(pipelineStage)
 
     featurePipeline.fit(samples)
@@ -178,7 +178,7 @@ object FeatureEngineering {
       .setOutputCols(Array("content_type_vector"))
       .setDropLast(false)
 
-    val ctr_discretizer = new QuantileDiscretizer()
+    val ctrDiscretizer = new QuantileDiscretizer()
       .setInputCol("item_ctr")
       .setOutputCol("ctr_bucket")
       .setNumBuckets(100)
@@ -188,7 +188,7 @@ object FeatureEngineering {
 
     val scaler = new MinMaxScaler().setInputCol("vectorFeature").setOutputCol("scaledFeatures")
 
-    Array(contentTypeIndexer, oneHotEncoder, ctr_discretizer, vectorAssembler, scaler)
+    Array(contentTypeIndexer, oneHotEncoder, ctrDiscretizer, vectorAssembler, scaler)
   }
 
   //pre process features to generate feature vector including embedding inner product
@@ -208,7 +208,7 @@ object FeatureEngineering {
       .setOutputCols(Array("content_type_vector"))
       .setDropLast(false)
 
-    val ctr_discretizer = new QuantileDiscretizer()
+    val ctrDiscretizer = new QuantileDiscretizer()
       .setInputCol("item_ctr")
       .setOutputCol("ctr_bucket")
       .setNumBuckets(100)
@@ -217,6 +217,6 @@ object FeatureEngineering {
     val vectorAssembler = new VectorAssembler().setInputCols(vectorAsCols).setOutputCol("vectorFeature")
 
     val scaler = new MinMaxScaler().setInputCol("vectorFeature").setOutputCol("scaledFeatures")
-   Array(contentTypeIndexer, oneHotEncoder, ctr_discretizer, vectorAssembler, scaler)
+   Array(contentTypeIndexer, oneHotEncoder, ctrDiscretizer, vectorAssembler, scaler)
   }
 }

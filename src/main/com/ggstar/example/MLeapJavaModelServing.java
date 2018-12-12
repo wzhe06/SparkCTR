@@ -11,10 +11,10 @@ import ml.combust.mleap.tensor.DenseTensor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MleapJavaModelServing {
+public class MLeapJavaModelServing {
     public static void main(String[] args){
         LeapFrameBuilder builder = new LeapFrameBuilder();
-        List<StructField> fields = new ArrayList<StructField>();
+        List<StructField> fields = new ArrayList();
         fields.add(builder.createField("user_id", builder.createInt()));
         fields.add(builder.createField("item_id", builder.createInt()));
         fields.add(builder.createField("category_id", builder.createInt()));
@@ -38,7 +38,5 @@ public class MleapJavaModelServing {
         DenseTensor prob = result.getTensor(16).toDense();
 
         System.out.println(Scala2JavaConverter.pauseCtr(prob));
-
-
     }
 }
