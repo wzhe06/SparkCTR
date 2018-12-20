@@ -31,10 +31,10 @@ public class JavaModelServer {
             ModelEvaluatorFactory modelEvaluatorFactory = ModelEvaluatorFactory.newInstance();
             this.model = modelEvaluatorFactory.newModelEvaluator(pmml);
             this.model.verify();
-            List<InputField> inputFields = this.model.getInputFields();
+            /*List<InputField> inputFields = this.model.getInputFields();
             for (InputField inputField : inputFields){
                 System.out.println(inputField.getName().getValue());
-            }
+            }*/
         }catch (Exception e){
             System.err.println(e);
         }

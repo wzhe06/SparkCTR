@@ -2,7 +2,7 @@
 <PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
     <Header>
         <Application name="JPMML-SparkML" version="1.4.6"/>
-        <Timestamp>2018-12-11T00:27:58Z</Timestamp>
+        <Timestamp>2018-12-20T00:49:09Z</Timestamp>
     </Header>
     <DataDictionary>
         <DataField name="content_type" optype="categorical" dataType="string">

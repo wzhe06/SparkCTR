@@ -33,5 +33,8 @@ public class JPMMLModelServing {
         for(int i = 0 ; i < result.size(); i++){
             System.out.println(result);
         }
+
+        System.out.println(result.get(new FieldName("probability(1)")));
+
     }
 }

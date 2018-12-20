@@ -2,7 +2,7 @@ package com.ggstar.ctrmodel
 
 import com.ggstar.features.FeatureEngineering
 import org.apache.spark.ml.Pipeline
-import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
+import org.apache.spark.ml.classification.{LogisticRegression, MultilayerPerceptronClassifier}
 import org.apache.spark.ml.linalg.DenseVector
 import org.apache.spark.sql.DataFrame
 
@@ -20,6 +20,7 @@ class InnerProductNNCtrModel extends BaseCtrModel {
     val layers = Array[Int](preparedSamples.first().getAs[DenseVector]("scaledFeatures").toArray.length,
       preparedSamples.first().getAs[DenseVector]("scaledFeatures").toArray.length / 2, 2)
 
+
     val nnModel = new MultilayerPerceptronClassifier()
       .setLayers(layers)
       .setBlockSize(128)
@@ -28,6 +29,7 @@ class InnerProductNNCtrModel extends BaseCtrModel {
       .setStepSize(0.005)   //learning step size, larger size will lead to loss vibration
       .setFeaturesCol("scaledFeatures")
       .setLabelCol("label")
+
     val pipelineStages = prePipelineModel.stages ++ Array(nnModel)
 
     _pipelineModel = new Pipeline().setStages(pipelineStages).fit(samplesWithInnerProduct)

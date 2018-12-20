@@ -12,10 +12,11 @@ object ModelSerialization {
     Logger.getLogger("org").setLevel(Level.ERROR)
 
     val conf = new SparkConf()
-      .setMaster("local[2]")
+      .setMaster("local")
       .setAppName("ctrModel")
-    new SparkContext(conf)
-    val spark = SparkSession.builder.appName("ctrModel").getOrCreate()
+      .set("spark.submit.deployMode", "client")
+
+    val spark = SparkSession.builder.config(conf).getOrCreate()
 
     val resourcesPath = this.getClass.getResource("/samples.snappy.orc")
     val rawSamples = spark.read.format("orc").option("compression", "snappy").load(resourcesPath.getPath)

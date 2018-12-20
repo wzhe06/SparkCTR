@@ -13,10 +13,11 @@ object ModelSelection {
     Logger.getLogger("org").setLevel(Level.ERROR)
 
     val conf = new SparkConf()
-      .setMaster("local[2]")
+      .setMaster("local")
       .setAppName("ctrModel")
-    new SparkContext(conf)
-    val spark = SparkSession.builder.appName("ctrModel").getOrCreate()
+      .set("spark.submit.deployMode", "client")
+
+    val spark = SparkSession.builder.config(conf).getOrCreate()
 
     val resourcesPath = this.getClass.getResource("/samples.snappy.orc")
     val rawSamples = spark.read.format("orc").option("compression", "snappy").load(resourcesPath.getPath)
@@ -30,6 +31,7 @@ object ModelSelection {
     val Array(trainingSamples, validationSamples) = samples.randomSplit(Array(0.7, 0.3))
     val evaluator = new Evaluator
 
+    /*
     println("Logistic Regression Ctr Prediction Model:")
     val lrModel = new LogisticRegressionCtrModel()
     lrModel.train(trainingSamples)
@@ -58,7 +60,7 @@ object ModelSelection {
     println("GBDT+LR Ctr Prediction Model:")
     val gbtlrModel = new GBTLRCtrModel()
     gbtlrModel.train(trainingSamples)
-    evaluator.evaluate(gbtlrModel.transform(validationSamples))
+    evaluator.evaluate(gbtlrModel.transform(validationSamples))*/
 
 
     println("IPNN Ctr Prediction Model:")
@@ -66,10 +68,10 @@ object ModelSelection {
     ipnnModel.train(trainingSamples)
     evaluator.evaluate(ipnnModel.transform(validationSamples))
 
-
+/*
     println("OPNN Ctr Prediction Model:")
     val opnnModel = new OuterProductNNCtrModel()
     opnnModel.train(trainingSamples)
-    evaluator.evaluate(opnnModel.transform(validationSamples))
+    evaluator.evaluate(opnnModel.transform(validationSamples))*/
   }
 }
