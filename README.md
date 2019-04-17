@@ -12,27 +12,6 @@ CTR prediction model based on pure Spark MLlib, no third-party library.
 * Inner Product Neural Network (IPNN)
 * Outer Product Neural Network (OPNN)
 
-# Dataset
-A small portion of some public ads database for test and initial debug.
-You can directly get comparision among different models on metrics such as AUC under ROC and P-R curve. <br /><br />
-**Data Format**
-
-        root
-         |-- user_id: integer (user id)
-         |-- item_id: integer (item id)
-         |-- category_id: integer (item category id)
-         |-- content_type: string (item content type)
-         |-- timestamp: string (timestamp)
-         |-- user_item_click: long (the number of user clicked the item)
-         |-- user_item_imp: double (the number of user watched the item)
-         |-- item_ctr: double (historical CTR of the item)
-         |-- is_new_user: integer (is the user a new user)
-         |-- user_embedding: array (embedding of the user)
-         |    |-- element: double
-         |-- item_embedding: array (embedding of the item)
-         |    |-- element: double
-         |-- label: integer (label of the sample 0-negative 1-positive)
-
 # Usage
 It's a maven project. Spark version is 2.3.0. Scala version is 2.11. <br />
 After dependencies are imported by maven automatically, you can simple run the example function (**com.ggstar.example.ModelSelection**) to train all the CTR models and get the metrics comparison among all the models.
